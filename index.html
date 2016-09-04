@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="angularPagination">
+  <head>
+    <meta charset="utf-8">
+    <title>Pagination in Angular js</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+  </head>
+  <body>
+	<div role="main" class="container theme-showcase">
+      <div class="" style="margin-top:10px;">
+        <div class="col-lg-8">
+			<div class="page-header">
+				<h2 id="tables" style="text-align:center;">Employee Information</h2>
+			</div>
+			<div class="bs-component" ng-controller="listdata">
+					<div style="text-align:left; width:40%;">
+						<input type="text" ng-model="search" class="form-control" placeholder="Search" class="glyphicon-search">
+					</div>
+				
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th ng-click="sort('name')">Name
+								<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('age')">Age
+								<span class="glyphicon sort-icon" ng-show="sortKey=='age'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('company')">Company
+								<span class="glyphicon sort-icon" ng-show="sortKey=='company'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('email')">Email
+								<span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr dir-paginate="user in users|orderBy:sortKey:reverse|filter:search|itemsPerPage:10">
+							<td>{{user.name}}</td>
+							<td>{{user.age}}</td>
+							<td>{{user.company}}</td>
+							<td>{{user.email}}</td>
+						</tr>
+					</tbody>
+				</table> 
+				<dir-pagination-controls
+					max-size="10"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls>
+			</div>
+		</div>
+      </div>
+    </div>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="dirPagination.js"></script>
+		<script src="app/app.js"></script>
+  </body>
+</html>
